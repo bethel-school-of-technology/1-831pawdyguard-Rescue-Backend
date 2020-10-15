@@ -52,4 +52,14 @@ app.get('/animalsPage', (req, res, next) => {
   });
 });
 
+// ***** Add new volunteer *****
+app.post('/api/newVol', (req,res,next) => {
+  const newVolunteer = req.body;
+  console.log(newVolunteer);
+  res.status(201).json({
+    message: 'Volunteer application received'
+  });
+});
+
+// ***** *****
 module.exports = app;
