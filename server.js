@@ -2,6 +2,7 @@ const app = require('./app');
 const debug = require('debug')('node-angular');
 const http = require('http');
 
+//function to make sure, we get a valid number for our port
 const normalizePort = (val) => {
   var port = parseInt(val, 10);
 
@@ -18,6 +19,7 @@ const normalizePort = (val) => {
   return false;
 };
 
+// if  an error occured, this function  will check the type of error and log it
 const onError = (error) => {
   if (error.syscall !== 'listen') {
     throw error;
@@ -37,6 +39,7 @@ const onError = (error) => {
   }
 };
 
+// logging, that we are listening to incoming requests
 const onListening = () => {
   const addr = server.address();
   const bind = typeof port === 'string' ? 'pipe ' + port : 'port ' + port;
@@ -47,6 +50,7 @@ const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 const server = http.createServer(app);
+//create two listeners
 server.on('error', onError);
 server.on('listening', onListening);
 server.listen(port);
