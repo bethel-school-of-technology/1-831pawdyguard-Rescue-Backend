@@ -1,7 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const mongoose = require('mongoose');
+
+
+const Volunteer = require('./models/volunteer');
+
 const app = express();
+
+//*****  connect application to mongodb /cloud  *****
+mongoose.connect('mongodb+srv://dbUser:password@cluster0.puxeb.mongodb.net/mongodb-name?retryWrites=true&w=majority',
+  {useUnifiedTopology: true, useNewUrlParser: true})
+  .then(() => {
+    console.log('Connection to MongoDB established!');
+  })
+  .catch(( )=> {
+   console.log('Connection failed!');
+   });
+
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -54,12 +71,29 @@ app.get('/animalsPage', (req, res, next) => {
 
 // ***** Add new volunteer *****
 app.post('/api/newVol', (req,res,next) => {
-  const newVolunteer = req.body;
-  console.log(newVolunteer);
+  //old version without data model
+ //const newVolunteer = req.body;
+  // makes a new javascript object
+  const volunteer = new Volunteer({
+    fname: req.body.fname,
+    lname: req.body.lname,
+    street: req.body.street,
+    street2: req.body.street2,
+    city: req.body.city,
+    state: req.body.state,
+    zip: req.body.zip,
+    email: req.body.email,
+    phone: req.body.phone,
+    details:req.body.details,
+    skills: req.body.skills
+  });
+
+  volunteer.save();
+  //console.log(newVolunteer);
   res.status(201).json({
     message: 'Volunteer application received'
   });
 });
 
-// ***** *****
+// ***** Export our express app to use it in server.js *****
 module.exports = app;
