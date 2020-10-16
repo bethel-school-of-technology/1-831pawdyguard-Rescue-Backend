@@ -1,7 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const Animal = require('./models/animal');
 
 const app = express();
+
+mongoose
+  .connect(
+    'mongodb+srv://michelleb:gDc0HmztGIRPyjee@cluster0.0y9ug.mongodb.net/PGRescue?retryWrites=true&w=majority'
+  )
+  .then(() => {
+    console.log('Connected to database!');
+  })
+  .catch(() => {
+    console.log('Connection failed!');
+  });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,9 +34,11 @@ app.use((req, res, next) => {
 });
 
 app.post('/animalsPage', (req, res, next) => {
-  // app.post('/pgr-frontend/src/app/animalsPage', (req, res, next) => {
-  const animal = req.body;
-  console.log(animal);
+  const animal = new Animal({
+    title: req.body.title,
+    content: req.body.content,
+  });
+  animal.save();
   res.status(201).json({
     message: 'Animal added successfully!',
   });
