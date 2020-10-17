@@ -19,7 +19,7 @@ const normalizePort = (val) => {
   return false;
 };
 
-// if  an error occured, this function  will check the type of error and log it
+// if  an error occurred, this function  will check the type of error and log it
 const onError = (error) => {
   if (error.syscall !== 'listen') {
     throw error;
