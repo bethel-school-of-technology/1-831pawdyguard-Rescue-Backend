@@ -1,15 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const mongoose = require('mongoose');
-
-
+const Animal = require('./models/animal');
 const Volunteer = require('./models/volunteer');
-
 const app = express();
 
 //*****  connect application to mongodb /cloud  *****
-mongoose.connect('mongodb+srv://dbUser:password@cluster0.puxeb.mongodb.net/mongodb-name?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://michelleb:gDc0HmztGIRPyjee@cluster0.0y9ug.mongodb.net/PGRescue?retryWrites=true&w=majority'
   {useUnifiedTopology: true, useNewUrlParser: true})
   .then(() => {
     console.log('Connection to MongoDB established!');
@@ -38,12 +35,15 @@ app.use((req, res, next) => {
 
 app.post('/animalsPage', (req, res, next) => {
   // app.post('/pgr-frontend/src/app/animalsPage', (req, res, next) => {
-  const animal = req.body;
-  console.log(animal);
-  res.status(201).json({
-    message: 'Animal added successfully!',
+    const animal = new Animal({
+      title: req.body.title,
+      content: req.body.content,
+    });
+    animal.save();
+    res.status(201).json({
+      message: 'Animal added successfully!',
+    });
   });
-});
 
 app.get('/animalsPage', (req, res, next) => {
   const animals = [
