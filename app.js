@@ -56,6 +56,13 @@ app.get('/animalsPage', (req, res, next) => {
   });
 });
 
+app.delete('/animalsPage/:id', (req, res, next) => {
+  Animal.deleteOne({ _id: req.params.id }).then((result) => {
+    console.log(result);
+    res.status(200).json({ message: 'Animal deleted!' });
+  });
+});
+
 // ***** Add new volunteer *****
 app.post('/api/newVol', (req, res, next) => {
   //old version without data model
