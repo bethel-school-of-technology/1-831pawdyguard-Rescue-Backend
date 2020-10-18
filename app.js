@@ -41,9 +41,11 @@ app.post('/animalsPage', (req, res, next) => {
     title: req.body.title,
     content: req.body.content,
   });
-  animal.save();
-  res.status(201).json({
-    message: 'Animal added successfully!',
+  animal.save().then((createdAnimal) => {
+    res.status(201).json({
+      message: 'Animal added successfully!',
+      animalId: createdAnimal._id,
+    });
   });
 });
 
