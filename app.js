@@ -110,10 +110,11 @@ app.post('/api/newVol', (req, res, next) => {
 
   volunteer.save();
   //console.log(newVolunteer);
+  //console.log(volunteer);
   res.status(201).json({
     message: 'Volunteer application received',
   });
 });
 
-// ***** Export our express app to use it in server.js *****
+// ***** Exports our express app to use it in server.js *****
 module.exports = app;
