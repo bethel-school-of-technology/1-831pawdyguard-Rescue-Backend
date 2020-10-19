@@ -1,4 +1,5 @@
 const express = require('express');
+// const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -8,12 +9,11 @@ const Volunteer = require('./models/volunteer');
 const app = express();
 
 //*****  connect application to mongodb /cloud  *****
- mongoose
-   .connect(
-     'mongodb+srv://michelleb:gDc0HmztGIRPyjee@cluster0.0y9ug.mongodb.net/PGRescue?retryWrites=true&w=majority'
-     // my nodes askes for this line of code (Gabriele)
-     //,{ useUnifiedTopology: true, useNewUrlParser: true }
-   )
+mongoose
+  .connect(
+    'mongodb+srv://michelleb:gDc0HmztGIRPyjee@cluster0.0y9ug.mongodb.net/PGRescue?retryWrites=true&w=majority',
+    { useUnifiedTopology: true, useNewUrlParser: true }
+  )
   .then(() => {
     console.log('Connection to MongoDB established!');
   })
@@ -24,7 +24,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//CORS middleware
 app.use((req, res, next) => {
+  //Enabling CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Headers',
@@ -32,7 +34,7 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     'Access-Control-Allow-Methods',
-    'GET, POST, PUT, PATCH, DELETE, OPTIONS'
+    'GET, POST, PATCH, PUT, DELETE, OPTIONS'
   );
   next();
 });
@@ -42,9 +44,22 @@ app.post('/animalsPage', (req, res, next) => {
     title: req.body.title,
     content: req.body.content,
   });
-  animal.save();
-  res.status(201).json({
-    message: 'Animal added successfully!',
+  animal.save().then((createdAnimal) => {
+    res.status(201).json({
+      message: 'Animal added successfully!',
+      animalId: createdAnimal._id,
+    });
+  });
+});
+
+app.put('/animalsPage/:id', (req, res, next) => {
+  const animal = new Animal({
+    _id: req.body.id,
+    title: req.body.title,
+    content: req.body.content,
+  });
+  Animal.updateOne({ _id: req.params.id }, animal).then((result) => {
+    res.status(200).json({ message: 'Update successful!' });
   });
 });
 
@@ -54,6 +69,23 @@ app.get('/animalsPage', (req, res, next) => {
       message: 'Animals fetched successfully!',
       animals: documents,
     });
+  });
+});
+
+app.get('/animalsPage/:id', (req, res, next) => {
+  Animal.findById(req.params.id).then((animal) => {
+    if (animal) {
+      res.status(200).json(animal);
+    } else {
+      res.status(404).json({ message: 'Animal not found!' });
+    }
+  });
+});
+
+app.delete('/animalsPage/:id', (req, res, next) => {
+  Animal.deleteOne({ _id: req.params.id }).then((result) => {
+    console.log(result);
+    res.status(200).json({ message: 'Animal deleted!' });
   });
 });
 
