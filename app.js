@@ -8,11 +8,12 @@ const Volunteer = require('./models/volunteer');
 const app = express();
 
 //*****  connect application to mongodb /cloud  *****
-mongoose
-  .connect(
-    'mongodb+srv://michelleb:gDc0HmztGIRPyjee@cluster0.0y9ug.mongodb.net/PGRescue?retryWrites=true&w=majority'
-  )
-  // {useUnifiedTopology: true, useNewUrlParser: true}
+ mongoose
+   .connect(
+     'mongodb+srv://michelleb:gDc0HmztGIRPyjee@cluster0.0y9ug.mongodb.net/PGRescue?retryWrites=true&w=majority'
+     // my nodes askes for this line of code (Gabriele)
+     //,{ useUnifiedTopology: true, useNewUrlParser: true }
+   )
   .then(() => {
     console.log('Connection to MongoDB established!');
   })
@@ -77,10 +78,11 @@ app.post('/api/newVol', (req, res, next) => {
 
   volunteer.save();
   //console.log(newVolunteer);
+  //console.log(volunteer);
   res.status(201).json({
     message: 'Volunteer application received',
   });
 });
 
-// ***** Export our express app to use it in server.js *****
+// ***** Exports our express app to use it in server.js *****
 module.exports = app;
