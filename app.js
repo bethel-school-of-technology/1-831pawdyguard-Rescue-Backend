@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const Animal = require('./models/animal');
 const Volunteer = require('./models/volunteer');
 
+const userRoutes = require("./routes/user");
+
 const app = express();
 
 //*****  connect application to mongodb /cloud  *****
@@ -115,6 +117,8 @@ app.post('/api/newVol', (req, res, next) => {
     message: 'Volunteer application received',
   });
 });
+
+app.use("/api/user", userRoutes);
 
 // ***** Exports our express app to use it in server.js *****
 module.exports = app;
