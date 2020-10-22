@@ -12,6 +12,7 @@ const volunteerSchema = mongoose.Schema({
   email: { type: String, required: true },
   phone: { type: String, required: true },
   details:{ type: String, required: true },
+  ownsAnimal: { type: String},
   skills: { type: String, required: true }
 });
 
