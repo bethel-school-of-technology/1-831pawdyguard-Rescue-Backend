@@ -107,7 +107,8 @@ app.post('/api/newVol', (req, res, next) => {
     email: req.body.email,
     phone: req.body.phone,
     details: req.body.details,
-    skills: req.body.skills,
+    ownsAnimal: req.body.ownsAnimal,
+    skills: req.body.skills
   });
 
   volunteer.save();
