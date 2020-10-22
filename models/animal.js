@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const animalSchema = mongoose.Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
+  imagePath: { type: String, required: true },
   // hidden: { type: Boolean, default: false }, will add later
 });
 
