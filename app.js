@@ -1,12 +1,12 @@
+const path = require('path');
 const express = require('express');
-// const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const Animal = require('./models/animal');
 const Volunteer = require('./models/volunteer');
 
 const userRoutes = require("./routes/user");
+const animalsRoutes = require('./routes/animals');
 
 const app = express();
 
@@ -25,6 +25,7 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/images', express.static(path.join('backend/images')));
 
 //CORS middleware
 app.use((req, res, next) => {
@@ -32,7 +33,8 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
+    'Origin, X-Requested-With, Content-Type, Accept',
+    'Authorization'
   );
   res.setHeader(
     'Access-Control-Allow-Methods',
@@ -41,55 +43,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post('/animalsPage', (req, res, next) => {
-  const animal = new Animal({
-    title: req.body.title,
-    content: req.body.content,
-  });
-  animal.save().then((createdAnimal) => {
-    res.status(201).json({
-      message: 'Animal added successfully!',
-      animalId: createdAnimal._id,
-    });
-  });
-});
 
-app.put('/animalsPage/:id', (req, res, next) => {
-  const animal = new Animal({
-    _id: req.body.id,
-    title: req.body.title,
-    content: req.body.content,
-  });
-  Animal.updateOne({ _id: req.params.id }, animal).then((result) => {
-    res.status(200).json({ message: 'Update successful!' });
-  });
-});
-
-app.get('/animalsPage', (req, res, next) => {
-  Animal.find().then((documents) => {
-    res.status(200).json({
-      message: 'Animals fetched successfully!',
-      animals: documents,
-    });
-  });
-});
-
-app.get('/animalsPage/:id', (req, res, next) => {
-  Animal.findById(req.params.id).then((animal) => {
-    if (animal) {
-      res.status(200).json(animal);
-    } else {
-      res.status(404).json({ message: 'Animal not found!' });
-    }
-  });
-});
-
-app.delete('/animalsPage/:id', (req, res, next) => {
-  Animal.deleteOne({ _id: req.params.id }).then((result) => {
-    console.log(result);
-    res.status(200).json({ message: 'Animal deleted!' });
-  });
-});
 
 // ***** Add new volunteer *****
 app.post('/api/newVol', (req, res, next) => {
@@ -120,6 +74,7 @@ app.post('/api/newVol', (req, res, next) => {
 });
 
 app.use("/api/user", userRoutes);
+app.use('/animalsPage', animalsRoutes);
 
 // ***** Exports our express app to use it in server.js *****
 module.exports = app;
