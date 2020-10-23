@@ -13,7 +13,7 @@ const app = express();
 //*****  connect application to mongodb /cloud  *****
 mongoose
   .connect(
-    'mongodb+srv://michelleb:gDc0HmztGIRPyjee@cluster0.0y9ug.mongodb.net/PGRescue?retryWrites=true&w=majority',
+    'mongodb+srv://michelleb:<PASSWORD>@cluster0.0y9ug.mongodb.net/<dbname>?retryWrites=true&w=majority',
     { useUnifiedTopology: true, useNewUrlParser: true }
   )
   .then(() => {
