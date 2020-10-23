@@ -1,9 +1,8 @@
 const app = require('./app');
 const debug = require('debug')('node-angular');
 const http = require('http');
-
 //function to make sure, we get a valid number for our port
-const normalizePort = (val) => {
+function normalizePort(val) {
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -17,8 +16,7 @@ const normalizePort = (val) => {
   }
 
   return false;
-};
-
+}
 // if  an error occurred, this function  will check the type of error and log it
 const onError = (error) => {
   if (error.syscall !== 'listen') {
@@ -42,7 +40,7 @@ const onError = (error) => {
 // logging, that we are listening to incoming requests
 const onListening = () => {
   const addr = server.address();
-  const bind = typeof port === 'string' ? 'pipe ' + port : 'port ' + port;
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + port;
   debug('Listening on ' + bind);
 };
 
