@@ -1,6 +1,7 @@
 const express = require('express');
-const Animal = require('../models/animal');
 const multer = require('multer');
+
+const Animal = require('../models/animal');
 
 const router = express.Router();
 
@@ -12,15 +13,14 @@ const MEDIA_TYPE_MAP = {
 
 //configuring multer
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    // cb callback
+  destination: (req, file, cb) => {      //cb callback
     const isValid = MEDIA_TYPE_MAP[file.mediatype];
     let error = new Error('Invalid media type');
     if (isValid) {
       error = null;
     }
     // cb(null, "/backend/images");
-    cb(error, '/backend/images'); //check "backend/images"
+    cb(error, '/backend/images'); //check "/images"
   },
   filename: (req, file, cb) => {
     const name = file.originalname.toLowerCase().split(' ').join('-');
@@ -36,16 +36,14 @@ router.post("",
     const animal = new Animal({
       title: req.body.title,
       content: req.body.content,
-      imagePath: url + '/backend/images/' + req.file.filename,
+      imagePath: url + '/images/' + req.file.filename,  
     });
     animal.save().then((createdAnimal) => {
       res.status(201).json({
         message: 'Animal added successfully!',
         animal: {
+          ...createdAnimal,
           id: createdAnimal._id,
-          title: createdAnimal.title,
-          content: createdAnimal.content,
-          imagePath: createdAnimal.imagePath,
         },
       });
     });
