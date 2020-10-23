@@ -30,6 +30,7 @@ router.post("/signup", (req, res, next) => {
   });
 
   router.post("/login", (req,res,next) => {
+      let fetchedUser;
       //email in DB matches email attached to req
       User.findOne({email: req.body.email })
       .then(user => {
@@ -38,6 +39,7 @@ router.post("/signup", (req, res, next) => {
                 message: "Auth Failed!"
             });
         }
+        fetchedUser = user;
         //found user - compare input to encrypted password 
         return bcrypt.compare(req.body.password, user.password);
       })
@@ -47,8 +49,9 @@ router.post("/signup", (req, res, next) => {
                 message: "Auth Failed"
             });
         }
+        //creates token
         const token = jwt.sign(
-            { email: user.email, userId: user._id },
+            { email: fetchedUser.email, userId: fetchedUser._id },
             "secret_phrase_for_creating_hashes", 
             { expiresIn: "1h" }
             );  
