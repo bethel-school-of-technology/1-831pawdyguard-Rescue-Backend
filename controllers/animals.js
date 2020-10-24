@@ -32,7 +32,7 @@ exports.updateAnimal = (req, res, next) => {
   let imagePath = req.body.imagePath;
   if (req.file) {
     const url = req.protocol + '://' + req.get('host');
-    imagePath = url + '/backend/images/' + req.file.filename;
+    imagePath = url + '/images/' + req.file.filename;
   }
   const animal = new Animal({
     _id: req.body.id,

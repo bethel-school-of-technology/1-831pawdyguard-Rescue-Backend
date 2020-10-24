@@ -7,7 +7,7 @@ const extractFile = require('../middleware/multer-file');
 
 const router = express.Router();
 
-router.post('', checkAuth, extractFile, AnimalController.createPost);
+router.post('', checkAuth, extractFile, AnimalController.createAnimal);
 
 router.put('/:id', checkAuth, extractFile, AnimalController.updateAnimal);
 
