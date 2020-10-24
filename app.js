@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const Volunteer = require('./models/volunteer');
 
-const userRoutes = require("./routes/user");
+const userRoutes = require('./routes/user');
 const animalsRoutes = require('./routes/animals');
 
 const app = express();
@@ -43,8 +43,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
 // ***** Add new volunteer *****
 app.post('/api/newVol', (req, res, next) => {
   //old version without data model
@@ -62,7 +60,7 @@ app.post('/api/newVol', (req, res, next) => {
     phone: req.body.phone,
     details: req.body.details,
     ownsAnimal: req.body.ownsAnimal,
-    skills: req.body.skills
+    skills: req.body.skills,
   });
 
   volunteer.save();
@@ -73,7 +71,7 @@ app.post('/api/newVol', (req, res, next) => {
   });
 });
 
-app.use("/api/user", userRoutes);
+app.use('/api/user', userRoutes);
 app.use('/animalsPage', animalsRoutes);
 
 // ***** Exports our express app to use it in server.js *****
