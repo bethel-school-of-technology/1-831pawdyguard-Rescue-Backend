@@ -36,7 +36,6 @@ const onError = (error) => {
       throw error;
   }
 };
-
 // logging, that we are listening to incoming requests
 const onListening = () => {
   const addr = server.address();
