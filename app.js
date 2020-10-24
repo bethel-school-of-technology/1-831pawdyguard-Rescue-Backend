@@ -29,7 +29,6 @@ app.use('/images', express.static(path.join('backend/images')));
 
 //CORS middleware
 app.use((req, res, next) => {
-  //Enabling CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Headers',
