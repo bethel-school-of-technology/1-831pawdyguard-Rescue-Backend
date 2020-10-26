@@ -52,6 +52,7 @@ router.post('/login', (req, res, next) => {
       const token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser._id },
         'secret_phrase_for_creating_hashes',
+        // process.env.JWT_KEY,     //**now stored in nodemon.json
         { expiresIn: '1h' }
       );
       res.status(200).json({
