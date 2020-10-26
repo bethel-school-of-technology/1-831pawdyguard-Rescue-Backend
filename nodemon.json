@@ -1,0 +1,6 @@
+{
+  "env": {
+    "MONGO-ATLAS+PW": "gDc0HmztGIRPyjee",
+    "JWT_KEY": "secret_phrase_for_creating_hashes"
+  }
+}
