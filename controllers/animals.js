@@ -95,7 +95,7 @@ exports.getAnimal = (req, res, next) => {
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'Fetching post failed!',
+        message: 'Fetching animal failed!',
       });
     });
 };
@@ -106,7 +106,7 @@ exports.deleteAnimal = (req, res, next) => {
       if (result.n > 0) {
         res.status(200).json({ message: 'Animal Deleted successfully!' });
       } else {
-        res.status(401).json({ message: 'Not authorized.' });
+        res.status(401).json({ message: 'Not authorized to delete.' });
       }
     })
     .catch((error) => {
