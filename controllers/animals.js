@@ -8,7 +8,6 @@ exports.createPost = (req, res, next) => {
     title: req.body.title,
     content: req.body.content,
     imagePath: url + '/images/' + req.file.filename,
-    creator: req.userData.userId,
   });
   animal
     .save()
@@ -39,9 +38,8 @@ exports.updateAnimal = (req, res, next) => {
     title: req.body.title,
     content: req.body.content,
     imagePath: imagePath,
-    creator: req.userData.userId,
   });
-  Animal.updateOne({ _id: req.params.id, creator: req.userData.userId }, animal)
+  Animal.updateOne({ _id: req.params.id }, animal)
     .then((result) => {
       if (result.n > 0) {
         res.status(200).json({ message: 'Animal Updated successfully!' });
@@ -101,7 +99,7 @@ exports.getAnimal = (req, res, next) => {
 };
 
 exports.deleteAnimal = (req, res, next) => {
-  Animal.deleteOne({ _id: req.params.id, creator: req.userData.userId })
+  Animal.deleteOne({ _id: req.params.id })
     .then((result) => {
       if (result.n > 0) {
         res.status(200).json({ message: 'Animal Deleted successfully!' });
