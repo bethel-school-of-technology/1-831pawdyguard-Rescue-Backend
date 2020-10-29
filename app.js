@@ -3,19 +3,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-
 const userRoutes = require('./routes/user');
-const animalsRoutes = require('./routes/animals');
 const volunteerRoutes = require('./routes/volunteer');
+const animalsRoutes = require('./routes/animals');
 
 const app = express();
 
 //*****  connect application to mongodb /cloud  *****
 mongoose
   .connect(
-    'mongodb+srv://michelleb:' +
-      process.env.MONGO_ATLAS_PW +
-      '@cluster0.0y9ug.mongodb.net/PGRescue?retryWrites=true&w=majority',
+    'mongodb+srv://michelleb:gDc0HmztGIRPyjee@cluster0.0y9ug.mongodb.net/PGRescue?retryWrites=true&w=majority',
     { useUnifiedTopology: true, useNewUrlParser: true }
   )
   .then(() => {
@@ -42,7 +39,6 @@ app.use((req, res, next) => {
   );
   next();
 });
-
 
 app.use('/api/user', userRoutes);
 app.use('/api/animalsPage', animalsRoutes);
