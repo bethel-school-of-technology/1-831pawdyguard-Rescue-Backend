@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/user', userRoutes);
-app.use('/animalsPage', animalsRoutes);
+app.use('/api/animalsPage', animalsRoutes);
 app.use('/api/newVol', volunteerRoutes);
 
 // ***** Exports our express app to use it in server.js *****
