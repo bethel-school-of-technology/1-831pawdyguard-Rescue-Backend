@@ -10,7 +10,8 @@ const donorSchema = mongoose.Schema({
   state: { type: String, required: true },
   zip: { type: String, required: true },
   email: { type: String, required: true },
-  phone: { type: String, required: true }  
+  phone: { type: String, required: true },
+  wantsLetter: { type: String, required: true }
 });
 
 // turn schema into a model 
