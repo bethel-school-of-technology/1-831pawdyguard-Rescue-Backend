@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
 const volunteerRoutes = require('./routes/volunteer');
 const animalsRoutes = require('./routes/animals');
+const donorRoutes = require('./routes/donor');
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use((req, res, next) => {
 app.use('/api/user', userRoutes);
 app.use('/animalsPage', animalsRoutes);
 app.use('/api/newVol', volunteerRoutes);
+app.use('/api/newDonor', donorRoutes);
 
 // ***** Exports our express app to use it in server.js *****
 module.exports = app;
