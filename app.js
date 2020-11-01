@@ -14,7 +14,7 @@ const app = express();
 mongoose
   .connect(
     'mongodb+srv://michelleb:gDc0HmztGIRPyjee@cluster0.0y9ug.mongodb.net/PGRescue?retryWrites=true&w=majority',
-    { useUnifiedTopology: true, useNewUrlParser: true }
+    { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
   )
   .then(() => {
     console.log('Connection to MongoDB established!');
@@ -25,7 +25,8 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/images', express.static(path.join('backend/images')));
+app.use('/animal-images', express.static(path.join('animal-images')));
+// app.use('/images', express.static(path.join('/animal-images')));
 
 //CORS middleware
 app.use((req, res, next) => {
