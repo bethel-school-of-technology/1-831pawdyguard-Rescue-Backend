@@ -25,7 +25,7 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/animal-images', express.static(path.join('animal-images')));
+app.use('/animal-images', express.static(path.join('backend/animal-images')));
 // app.use('/images', express.static(path.join('/animal-images')));
 
 //CORS middleware
@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/user', userRoutes);
-app.use('/animalsPage', animalsRoutes);
+app.use('/api/animals', animalsRoutes);
 app.use('/api/newVol', volunteerRoutes);
 app.use('/api/newDonor', donorRoutes);
 

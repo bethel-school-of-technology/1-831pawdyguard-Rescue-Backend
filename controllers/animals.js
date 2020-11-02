@@ -67,7 +67,7 @@ exports.getAnimals = (req, res, next) => {
   animalQuery
     .then((documents) => {
       fetchedAnimals = documents;
-      return Animal.count();
+      return Animal.countDocuments();
     })
     .then((count) => {
       res.status(200).json({
