@@ -7,13 +7,16 @@ const userRoutes = require('./routes/user');
 const volunteerRoutes = require('./routes/volunteer');
 const animalsRoutes = require('./routes/animals');
 const donorRoutes = require('./routes/donor');
+const { MONGO_ATLAS_PW } = require('./config');
 
 const app = express();
 
 //*****  connect application to mongodb /cloud  *****
 mongoose
   .connect(
-    'mongodb+srv://michelleb:gDc0HmztGIRPyjee@cluster0.0y9ug.mongodb.net/PGRescue?retryWrites=true&w=majority',
+    'mongodb+srv://michelleb:' +
+      MONGO_ATLAS_PW +
+      '@cluster0.0y9ug.mongodb.net/PGRescue?retryWrites=true&w=majority',
     { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
   )
   .then(() => {
@@ -26,7 +29,6 @@ mongoose
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/animal-images', express.static(path.join('backend/animal-images')));
-// app.use('/images', express.static(path.join('/animal-images')));
 
 //CORS middleware
 app.use((req, res, next) => {

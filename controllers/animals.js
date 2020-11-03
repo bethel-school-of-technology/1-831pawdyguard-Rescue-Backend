@@ -1,7 +1,8 @@
 const Animal = require('../models/animal');
 
 exports.createAnimal = (req, res, next) => {
-  const url = req.protocol + '://' + req.get('host');
+  // const url = req.protocol + '://' + req.get('host');
+  const url = req.protocol + '://' + 'localhost:3000' + req.originalUrl;
   const animal = new Animal({
     title: req.body.title,
     content: req.body.content,
