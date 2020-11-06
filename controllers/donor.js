@@ -2,6 +2,7 @@ const Donor = require('../models/donor');
 
 exports.saveDonor = (req, res, next) => {
   console.log('In controllers-saveDonor');
+  console.log('Timestamp: '+ req.body.timestamp);
   const donor = new Donor({
     fname: req.body.fname,
     lname: req.body.lname,
@@ -12,7 +13,8 @@ exports.saveDonor = (req, res, next) => {
     zip: req.body.zip,
     email: req.body.email,
     phone: req.body.phone,
-    wantsLetter: req.body.wantsLetter
+    wantsLetter: req.body.wantsLetter,
+    timestamp: req.body.timestamp
   });
 
   donor.save().then(newDonor => {
