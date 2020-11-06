@@ -7,9 +7,7 @@ const extractMimeFile = require('../middleware/mime-file');
 
 const router = express.Router();
 
-router.post('', checkAuth, extractMimeFile, function (req, res) {
-  AnimalController.createPost;
-});
+router.post('', checkAuth, extractMimeFile, AnimalController.createAnimal);
 
 router.put('/:id', checkAuth, extractMimeFile, AnimalController.updateAnimal);
 
