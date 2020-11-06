@@ -1,12 +1,10 @@
 const Animal = require('../models/animal');
 
 exports.createAnimal = (req, res, next) => {
-  // const url = req.protocol + '://' + req.get('host');
-  const url = req.protocol + '://' + 'localhost:3000' + req.originalUrl;
+  const url = req.protocol + '://' + req.get('host');
   const animal = new Animal({
     title: req.body.title,
     content: req.body.content,
-    // imagePath: 'http://localhost:3000' + '/animal-images/' + req.file.filename,
     imagePath: url + '/animal-images/' + req.file.filename,
     creator: req.userData.userId,
   });
@@ -23,7 +21,7 @@ exports.createAnimal = (req, res, next) => {
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'Creating an Animal card failed!',
+        message: 'Failed to Create New Animal',
       });
     });
 };

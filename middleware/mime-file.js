@@ -5,15 +5,10 @@ const MIME_TYPE_MAP = {
   'image/jpeg': 'jpg',
   'image/jpg': 'jpg',
 };
-//configuring multer
+//configuring multer; store images in backend/animal-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const isValid = MIME_TYPE_MAP[file.mimetype];
-    let error = new Error('Invalid mime type');
-    if (isValid) {
-      error = null;
-    }
-    cb(error, '/animal-images'); //or try "backend/animal-images" **
+    cb(null, '../backend/animal-images');
   },
   filename: (req, file, cb) => {
     const name = file.originalname.toLowerCase().split(' ').join('-');

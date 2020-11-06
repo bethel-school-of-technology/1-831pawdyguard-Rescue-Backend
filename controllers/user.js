@@ -20,7 +20,7 @@ exports.createUser = (req, res, next) => {
       })
       .catch((err) => {
         res.status(500).json({
-          message: 'Try a different password or email!',
+          message: 'Invalid authentication. Try a different password or email!',
         });
       });
   });
@@ -33,7 +33,7 @@ exports.userLogin = (req, res, next) => {
     .then((user) => {
       if (!user) {
         return res.status(401).json({
-          message: 'Auth Failed!',
+          message: 'Authentication Failed!',
         });
       }
       fetchedUser = user;
@@ -44,19 +44,19 @@ exports.userLogin = (req, res, next) => {
       if (!result) {
         //false no match
         return res.status(401).json({
-          message: 'Auth Failed',
+          message: 'Authentication Failed',
         });
       }
       //creates token
       const token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser._id },
-        JWT_KEY,
+        'secret_phrase_for_creating_hashes',
         { expiresIn: '1h' }
       );
       res.status(200).json({
         token: token,
         expiresIn: 3600,
-        userId: fetchedUser._id,
+        userId: fetchedUser._id, //userId is passed to frontend/auth/auth.service
       });
     })
     .catch((err) => {
