@@ -13,7 +13,9 @@ const volunteerSchema = mongoose.Schema({
   phone: { type: String, required: true },
   details:{ type: String, required: true },
   ownsAnimal: { type: String},
-  skills: { type: String, required: true }
+  skills: { type: String, required: true },
+  volchoice: { type: String },
+  timestamp: { type: Date, required: true }
 });
 
 // turn schema into a model 
