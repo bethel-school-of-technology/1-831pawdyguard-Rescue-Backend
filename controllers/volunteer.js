@@ -14,7 +14,9 @@ exports.saveVolunteer = (req, res, next) => {
     phone: req.body.phone,
     details: req.body.details,
     ownsAnimal: req.body.ownsAnimal,
-    skills: req.body.skills
+    skills: req.body.skills,
+    volchoice:req.body.volchoice,
+    timestamp:req.body.timestamp
   });
 
   volunteer.save().then(newVolunteer => {
