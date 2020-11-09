@@ -27,6 +27,7 @@ exports.createAnimal = (req, res, next) => {
 };
 
 exports.updateAnimal = (req, res, next) => {
+  console.log(req.file);
   let imagePath = req.body.imagePath;
   if (req.file) {
     const url = req.protocol + '://' + req.get('host');
@@ -39,6 +40,7 @@ exports.updateAnimal = (req, res, next) => {
     imagePath: imagePath,
     creator: req.userData.userId,
   });
+  console.log(animal);
   Animal.updateOne({ _id: req.params.id, creator: req.userData.userId }, animal)
     .then((result) => {
       if (result.n > 0) {
@@ -85,6 +87,7 @@ exports.getAnimals = (req, res, next) => {
 exports.getAnimal = (req, res, next) => {
   Animal.findById(req.params.id)
     .then((animal) => {
+      console.log(animal);
       if (animal) {
         res.status(200).json(animal);
       } else {
