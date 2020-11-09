@@ -28,7 +28,8 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/animal-images', express.static(path.join('backend/animal-images')));
+const newLocal = 'backend/animal-images';
+app.use('/animal-images', express.static(path.join(newLocal)));
 
 //CORS middleware
 app.use((req, res, next) => {

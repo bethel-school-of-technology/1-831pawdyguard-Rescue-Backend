@@ -13,7 +13,7 @@ router.put('/:id', checkAuth, extractMimeFile, AnimalController.updateAnimal);
 
 router.get('', AnimalController.getAnimals);
 
-router.get('/:id', AnimalController.deleteAnimal);
+router.get('/:id', AnimalController.getAnimal);
 
 router.delete('/:id', checkAuth, AnimalController.deleteAnimal);
 
