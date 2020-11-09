@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 const userRoutes = require('./routes/user');
 const volunteerRoutes = require('./routes/volunteer');
+const adoptionRoutes = require('./routes/adoption');
 const animalsRoutes = require('./routes/animals');
 const donorRoutes = require('./routes/donor');
 const { MONGO_ATLAS_PW } = require('./config');
@@ -48,6 +49,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/animals', animalsRoutes);
 app.use('/api/newVol', volunteerRoutes);
 app.use('/api/newDonor', donorRoutes);
+app.use('/api/adopt', adoptionRoutes);
 
 // ***** Exports our express app to use it in server.js *****
 module.exports = app;
