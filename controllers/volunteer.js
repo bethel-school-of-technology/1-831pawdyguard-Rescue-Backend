@@ -1,7 +1,7 @@
 const Volunteer = require('../models/volunteer');
 
 exports.saveVolunteer = (req, res, next) => {
-  console.log('In controllers exports.SaveVolunteer');
+  //console.log('In controllers exports.SaveVolunteer');
   const volunteer = new Volunteer({
     fname: req.body.fname,
     lname: req.body.lname,
@@ -20,7 +20,7 @@ exports.saveVolunteer = (req, res, next) => {
   });
 
   volunteer.save().then(newVolunteer => {
-    console.log(newVolunteer);
+    //console.log(newVolunteer);
     res.status(201).json({
       message: 'Volunteer application received'
     }); 

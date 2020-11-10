@@ -1,8 +1,7 @@
 const Donor = require('../models/donor');
 
 exports.saveDonor = (req, res, next) => {
-  console.log('In controllers-saveDonor');
-  console.log('Timestamp: '+ req.body.timestamp);
+  //console.log('Timestamp: '+ req.body.timestamp);
   const donor = new Donor({
     fname: req.body.fname,
     lname: req.body.lname,
@@ -18,7 +17,7 @@ exports.saveDonor = (req, res, next) => {
   });
 
   donor.save().then(newDonor => {
-    console.log(newDonor);
+    //console.log(newDonor);
     res.status(201).json({
       message: 'Donor information received'
     }); 
