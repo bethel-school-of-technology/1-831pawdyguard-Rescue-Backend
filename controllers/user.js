@@ -47,7 +47,7 @@ exports.userLogin = (req, res, next) => {
           message: 'Authentication Failed',
         });
       }
-      //creates token
+      //creates token, because the login is ok
       const token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser._id },
         'secret_phrase_for_creating_hashes',
