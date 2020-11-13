@@ -4,8 +4,8 @@ const { IMAGE_URL } = require('../config');
 backendUrl = 'http://localhost';
 
 exports.createAnimal = (req, res, next) => {
-  // const url = req.protocol + '://' + req.get('host');
-  const url = backendUrl;
+  const url = req.protocol + '://' + req.get('host');
+
   const animal = new Animal({
     title: req.body.title,
     content: req.body.content,
@@ -34,8 +34,7 @@ exports.updateAnimal = (req, res, next) => {
   console.log(req.file);
   let imagePath = req.body.imagePath;
   if (req.file) {
-    // const url = req.protocol + '://' + req.get('host');
-    const url = backendUrl;
+    const url = req.protocol + '://' + req.get('host');
     imagePath = url + '/animal-images/' + req.file.filename;
   }
   const animal = new Animal({
