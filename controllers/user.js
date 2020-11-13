@@ -19,7 +19,7 @@ exports.createUser = (req, res, next) => {
         });
       })
       .catch((err) => {
-        res.status(500).json({
+        res.status(401).json({
           message: 'Invalid authentication. Try a different password or email!',
         });
       });
